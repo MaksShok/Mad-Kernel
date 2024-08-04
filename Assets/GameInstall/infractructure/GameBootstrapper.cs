@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Bootstrap.GameStates;
 using GameInstall;
 using GameInstall.Interfaces;
+using GameplayAssets.Input;
 using UnityEngine;
 
 public class GameBootstrapper : MonoBehaviour, ICoroutineRunner

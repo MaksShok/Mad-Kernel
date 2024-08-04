@@ -1,8 +1,8 @@
-﻿using System;
+﻿
 using GameInstall;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
+using GameplayAssets.Input;
 using UnityEngine;
+
 
 namespace Bootstrap.GameStates
 {
@@ -10,9 +10,9 @@ namespace Bootstrap.GameStates
     {
         private GameStateMachine _stateMachine;
         private SceneLoader _sceneLoader;
-        
+
         const string Initial = "Initial";
-        
+
         public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
         {
             _stateMachine = stateMachine;
@@ -21,7 +21,7 @@ namespace Bootstrap.GameStates
         
         public void Enter()
         {
-            // тут проходит регистарция того что нам нужно
+            RegistrationServices();
             _sceneLoader.Load(Initial, LoadGameScene);
         }
 
@@ -33,6 +33,15 @@ namespace Bootstrap.GameStates
         private void LoadGameScene()
         {
             _stateMachine.Enter<LoadGameSceneState, string>("GameScene");
+        }
+
+        public static IInputService RegistrationServices()
+        {
+            if (Application.isMobilePlatform)
+                return new MobileInputService();
+            
+            else 
+                return new DesktopInputService();
         }
     }
 }

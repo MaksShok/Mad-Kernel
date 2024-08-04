@@ -23,7 +23,7 @@ public class GameStateMachine
         IState state = GetState<TState>();
         state?.Enter();
 
-        Debug.Log("Состояние активно " + state.GetType().Name); // проверка
+        //Debug.Log("Состояние активно " + state.GetType().Name); // проверка
     }
 
     public void Enter<TState, T>(T param) where TState : class, IStateWithParam<T>
@@ -31,7 +31,7 @@ public class GameStateMachine
         IStateWithParam<T> state = GetState<TState>();
         state?.Enter(param);
 
-        Debug.Log("Состояние активно " + state.GetType().Name); // проверка
+        //Debug.Log("Состояние активно " + state.GetType().Name); // проверка
     }
 
     private TState GetState<TState>() where TState : class, IExitableState
